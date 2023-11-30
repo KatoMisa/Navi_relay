@@ -1,0 +1,54 @@
+# Navi_relay CMake config file
+#
+# This file sets the following variables:
+# Navi_relay_FOUND - Always TRUE.
+# Navi_relay_INCLUDE_DIRS - Directories containing the Navi_relay include files.
+# Navi_relay_IDL_DIRS - Directories containing the Navi_relay IDL files.
+# Navi_relay_LIBRARIES - Libraries needed to use Navi_relay.
+# Navi_relay_DEFINITIONS - Compiler flags for Navi_relay.
+# Navi_relay_VERSION - The version of Navi_relay found.
+# Navi_relay_VERSION_MAJOR - The major version of Navi_relay found.
+# Navi_relay_VERSION_MINOR - The minor version of Navi_relay found.
+# Navi_relay_VERSION_REVISION - The revision version of Navi_relay found.
+# Navi_relay_VERSION_CANDIDATE - The candidate version of Navi_relay found.
+
+message(STATUS "Found Navi_relay-@PROJECT_VERSION@")
+set(Navi_relay_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(Navi_relay_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(Navi_relay_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(Navi_relay_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(Navi_relay_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(Navi_relay_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(Navi_relay_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(Navi_relay_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(Navi_relay_VERSION @PROJECT_VERSION@)
+set(Navi_relay_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(Navi_relay_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(Navi_relay_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(Navi_relay_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+
